@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import commentsApi from '../apis/comments'
+import React from 'react';
+import Comments from './Comments';
 import Navbar from './Navbar';
 import Post from './Post';
 
@@ -23,6 +23,7 @@ const Dashboard = () => {
         <>
           <Navbar/>
           <Post />
+          <Comments />
 
         </>
     )
