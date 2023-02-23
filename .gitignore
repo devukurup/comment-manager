@@ -57,6 +57,7 @@ Sessionx.vim
 /tags
 # Vscode
 .vscode-test
+.vscode
 
 #---------------------------------------#
 # Linux Ignores                         #
