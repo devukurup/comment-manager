@@ -16,7 +16,7 @@ const Post = () => {
                     {isPostLiked ?
                     <LikeIcon onClick={() => setPostLiked(!isPostLiked)}/>
                     :
-                    <LikeFillIcon color="#ff0000" onClick={() => setPostLiked(!isPostLiked)}/>}
+                    <LikeFillIcon className="text-red-600" onClick={() => setPostLiked(!isPostLiked)}/>}
                 </div>
                 <div className="py-1 px-2 bg-gray-50 shadow cursor-pointer hover:bg-gray-200">
                  <CommentIcon />
