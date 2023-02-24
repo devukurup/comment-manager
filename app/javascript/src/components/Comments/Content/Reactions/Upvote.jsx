@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import UpVoteIcon from "remixicon-react/ArrowUpSFillIcon";
 import classNames from 'classnames';
 import commentsApi from '../../../../apis/comments';
+import { filterUpvotes } from '../../../../utils/filterUpvotes';
 
 
 const Upvote = ({ upvote_ids, currentUser, id, fetchComments }) => {
-    const ids = typeof  upvote_ids === "object" ? upvote_ids : [upvote_ids];
+    const ids = filterUpvotes(upvote_ids);
     const count = (ids)? ids.length: 0;
     const [isActive, setIsActive] = useState(ids ? ids.includes(currentUser.id): false);
 
     const handleUpdate = async (e, activeStatus) => {
         e.preventDefault();
         setIsActive(activeStatus);
-        const newUpvoteIds = activeStatus? ids?.push(currentUser.id) : ids?.filter(id => id!== currentUser.id);
+        let newUpvoteIds = activeStatus? [...ids, currentUser.id] : ids?.filter(id => id!== currentUser.id);
+        newUpvoteIds = typeof newUpvoteIds === "object" ? [...newUpvoteIds] : [ newUpvoteIds ];
         const payload = {
-            upvote_ids: JSON.stringify([...newUpvoteIds])
+            upvote_ids: newUpvoteIds ? JSON.stringify(newUpvoteIds) : null,
         }
         try {
             await commentsApi.update({ id, payload});

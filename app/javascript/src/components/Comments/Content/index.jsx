@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { getReplyComments } from '../../../utils/getReplyComments';
 import UserAvatar from './UserAvatar';
 import Body from './Body';
 import Reply from './Reactions/Reply';
@@ -9,11 +8,12 @@ import Editor from '../Editor';
 import commentsApi from '../../../apis/comments';
 import { checkIsCurrentUser } from "../../../utils/checkIsCurrentUser";
 
-const Content = ({ content, avatarProp, comments, parent, fetchComments, id, currentUser, userName, upvote_ids}) => {
-    const replies = getReplyComments(comments, id);
+const Content = ({ content, users, comments, parent, fetchComments, id, currentUser, upvote_ids, replies, userName}) => {
     const [isNewComment, setIsNewComment] = useState(false);
     const [ isEditComment, setIsEditComment] = useState(false);
     const isCurrentUser = checkIsCurrentUser(parent, currentUser);
+    const filteredUser = users?.filter(user => user?.id === parent);
+    const avatarProp= filteredUser?.[0]?.avatarProp;
 
     const handleUpdate = async (e, payload) => {
         e.preventDefault();
@@ -44,11 +44,11 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id, cur
             <New setIsNewComment={setIsNewComment} fetchComments={fetchComments} id={id}/>
         </div>}
 
-        {replies.length > 0 &&
+        {replies?.length > 0 &&
             <div className="flex flex-col ml-5">
             {
-            replies.map(({content, avatarProp, user_id, id, userName, upvote_ids }) =>
-            <Content id={id} content={content} upvote_ids={upvote_ids} avatarProp={avatarProp} comments={comments} parent={user_id} userName={userName} fetchComments={fetchComments} currentUser={currentUser}/>
+            replies.map(({content, avatarProp, user_id, id, upvote_ids, replies }) =>
+            <Content id={id} userName={userName} users={users} content={content} upvote_ids={upvote_ids} avatarProp={avatarProp} comments={comments} parent={user_id} fetchComments={fetchComments} currentUser={currentUser} replies={replies}/>
                 )}
                 </div>
                 }
