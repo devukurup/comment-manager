@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
       end
 
       def load_comment
-        @comment = Comment.find(comment_params[:id])
+        @comment = Comment.find(params[:id])
         unless @comment
           render status: :not_found, json: { error: "Comment not found" }
         end
