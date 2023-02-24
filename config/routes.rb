@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :comments, only: :index
+  defaults format: :json do
+    resources :comments, only: %i[index create update destroy]
+  end
 
   root "home#index"
   get '*path', to: 'home#index', via: :all
