@@ -4,10 +4,10 @@ import UserAvatar from './UserAvatar';
 import Body from './Body';
 import Reply from './Reactions/Reply';
 import Upvote from './Reactions/Upvote';
-import Editor from '../New';
-import New from '../Editor';
+import New from '../New';
+import Editor from '../Editor';
 
-const Content = ({ content, avatarProp, comments, parent}) => {
+const Content = ({ content, avatarProp, comments, parent, fetchComments}) => {
     const replies = getReplyComments(comments, parent);
     const [isNewComment, setIsNewComment] = useState(false);
     const [ isEditComment, setIsEditComment] = useState(false);
@@ -24,16 +24,16 @@ const Content = ({ content, avatarProp, comments, parent}) => {
         </div>
         </div>
         </div>}
-        {isEditComment && <New content={content} setIsEditComment={setIsEditComment}/>}
+        {isEditComment && <Editor content={content} setIsEditComment={setIsEditComment}/>}
         {isNewComment && <div className="flex w-11/12 content-end">
-            <Editor setIsNewComment={setIsNewComment} />
+            <New setIsNewComment={setIsNewComment} fetchComments={fetchComments}/>
         </div>}
 
         {replies.length > 0 &&
             <div className="flex flex-col ml-5">
             {
             replies.map(({content, avatarProp, user_id}) =>
-            <Content content={content} avatarProp={avatarProp} comments={comments} parent={user_id}/>
+            <Content content={content} avatarProp={avatarProp} comments={comments} parent={user_id} fetchComments={fetchComments}/>
                 )}
                 </div>
                 }

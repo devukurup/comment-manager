@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
+import commentsApi from '../../apis/comments';
 
-const New = ({ setIsNewComment }) => {
+const New = ({ setIsNewComment, fetchComments }) => {
     const [ newComment, setNewComment ] = useState("");
     const handleCancel = () => {
         setIsNewComment(false);
+        setNewComment("");
     }
-
-    const handlePost = () => {
-        console.log(newComment)
+    
+    const handlePost = async () => {
+        try{
+            const payload = {
+                content: newComment
+            }
+            await commentsApi.create(payload);
+            fetchComments();
+            handleCancel();
+        }
+        catch(error){
+            console.log(error);
+        }
     }
 
     return (
