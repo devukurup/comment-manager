@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 
     private
       def comment_params
-        params.require(:comment).permit(:id, :content, :upvote_ids, :parent_id, :is_nested_reply, :user_mentioned)
+        params.require(:comment).permit(:id, :content, :parent_id, :is_nested_reply, :user_mentioned, :upvote_ids => [])
       end
 
       def load_comment
