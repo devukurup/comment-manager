@@ -9,12 +9,11 @@ import Editor from '../Editor';
 import commentsApi from '../../../apis/comments';
 import { checkIsCurrentUser } from "../../../utils/checkIsCurrentUser";
 
-const Content = ({ content, avatarProp, comments, parent, fetchComments, id, currentUser, userName}) => {
+const Content = ({ content, avatarProp, comments, parent, fetchComments, id, currentUser, userName, upvote_ids}) => {
     const replies = getReplyComments(comments, parent);
     const [isNewComment, setIsNewComment] = useState(false);
     const [ isEditComment, setIsEditComment] = useState(false);
     const isCurrentUser = checkIsCurrentUser(parent, currentUser);
-
     const handleUpdate = async (payload) => {
         try {
             await commentsApi.update({ id, payload});
@@ -33,7 +32,7 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id, cur
             <div className="flex flex-col space-y-1 w-full">
             <Body userName={userName} content={content} setIsEditComment={setIsEditComment} id={id} fetchComments={fetchComments} isCurrentUser={isCurrentUser}/>
         <div className="flex space-x-6 items-center">
-            <Upvote />
+            <Upvote  upvote_ids={upvote_ids} currentUser={currentUser} id={id} fetchComments={fetchComments}/>
             <Reply setIsNewComment={setIsNewComment} />
         </div>
         </div>
@@ -46,8 +45,8 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id, cur
         {replies.length > 0 &&
             <div className="flex flex-col ml-5">
             {
-            replies.map(({content, avatarProp, user_id, id, userName}) =>
-            <Content id={id} content={content} avatarProp={avatarProp} comments={comments} parent={user_id} userName={userName} fetchComments={fetchComments} currentUser={currentUser}/>
+            replies.map(({content, avatarProp, user_id, id, userName, upvote_ids }) =>
+            <Content id={id} content={content} upvote_ids={upvote_ids} avatarProp={avatarProp} comments={comments} parent={user_id} userName={userName} fetchComments={fetchComments} currentUser={currentUser}/>
                 )}
                 </div>
                 }

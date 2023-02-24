@@ -5,7 +5,7 @@ const Comments = ({comments, fetchComments, currentUser, users, setComments}) =>
     const [parentComments, setParentComments] = useState([]);
     const setFilteredComments = () => {
         const filterComments = comments?.map(comment => {
-            const avatarProp = users.find(user => user.id === comment.user_id).avatarProp;
+            const avatarProp = users.find(user => user.id === comment.user_id)?.avatarProp;
             return({...comment, avatarProp})
         });
         setComments(filterComments);

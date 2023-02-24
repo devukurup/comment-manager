@@ -4,7 +4,7 @@ import Content from './Content';
 const List = ({ parentComments, comments, fetchComments, currentUser }) => {
     return (
         <>
-        {parentComments.map(({content, avatarProp, user_id, id, userName}) =>
+        {parentComments.map(({content, avatarProp, user_id, id, userName, upvote_ids}) =>
         <Content
             id={id}
             userName={userName}
@@ -15,6 +15,7 @@ const List = ({ parentComments, comments, fetchComments, currentUser }) => {
             parent={user_id}
             fetchComments={fetchComments}
             currentUser={currentUser}
+            upvote_ids={upvote_ids}
         />
             )}
         </>
