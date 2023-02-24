@@ -10,11 +10,13 @@ import commentsApi from '../../../apis/comments';
 import { checkIsCurrentUser } from "../../../utils/checkIsCurrentUser";
 
 const Content = ({ content, avatarProp, comments, parent, fetchComments, id, currentUser, userName, upvote_ids}) => {
-    const replies = getReplyComments(comments, parent);
+    const replies = getReplyComments(comments, id);
     const [isNewComment, setIsNewComment] = useState(false);
     const [ isEditComment, setIsEditComment] = useState(false);
     const isCurrentUser = checkIsCurrentUser(parent, currentUser);
-    const handleUpdate = async (payload) => {
+
+    const handleUpdate = async (e, payload) => {
+        e.preventDefault();
         try {
             await commentsApi.update({ id, payload});
             fetchComments();
