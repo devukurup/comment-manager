@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIsNestedReplyToComments < ActiveRecord::Migration[7.0]
   def change
     add_column :comments, :is_nested_reply, :boolean, default: false

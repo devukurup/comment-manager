@@ -1,33 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
+import classNames from "classnames";
+import LikeFillIcon from "remixicon-react/Heart3FillIcon";
+import LikeIcon from "remixicon-react/Heart3LineIcon";
+import CommentIcon from "remixicon-react/QuestionAnswerLineIcon";
+
 import BlogImage from "../../../assets/images/nature.jpeg";
-import CommentIcon from 'remixicon-react/QuestionAnswerLineIcon'
-import LikeIcon from 'remixicon-react/Heart3LineIcon';
-import LikeFillIcon from  'remixicon-react/Heart3FillIcon';
-import classNames from 'classnames';
 
-const Post = ({isNewComment, setIsNewComment}) => {
-    const [isPostLiked, setPostLiked] = useState(false);
-    return (
-        <div className="flex flex-col mx-auto w-3/5 border-2 b-1 p-5 m-2 mt-10 space-y-5">
-            <h1 className="font-semibold text-lg">Earth's treasures</h1>
-            <h4>Dudhsagar is a stunning waterfall located on the Mandovi River in Goa, India. The name "Dudhsagar" means "Sea of Milk" in Hindi, which refers to the appearance of the waterfall's white, frothy water as it cascades down from a height of over 300 meters.</h4>
-            <img src={BlogImage} alt="Nature's image" />
-            <div className="flex space-x-3">
-                <div className="py-1 px-2 bg-gray-50 shadow cursor-pointer hover:bg-gray-200">
-                    {isPostLiked ?
-                    <LikeIcon onClick={() => setPostLiked(!isPostLiked)}/>
-                    :
-                    <LikeFillIcon className="text-red-600" onClick={() => setPostLiked(!isPostLiked)}/>}
-                </div>
-                <div className={classNames("py-1 px-2 bg-gray-50 shadow cursor-pointer hover:bg-gray-200", {
-                    "bg-gray-200": isNewComment
-                })}>
-                 <CommentIcon onClick={() => setIsNewComment(true)}/>
-                </div>
-            </div>
+const Post = ({ isNewComment, setIsNewComment }) => {
+  const [isPostLiked, setIsPostLiked] = useState(false);
 
+  return (
+    <div className="b-1 m-2 mx-auto mt-10 flex w-3/5 flex-col space-y-5 border-2 p-5">
+      <h1 className="text-lg font-semibold">Earth's treasures</h1>
+      <h4>
+        Dudhsagar is a stunning waterfall located on the Mandovi River in Goa,
+        India. The name "Dudhsagar" means "Sea of Milk" in Hindi, which refers
+        to the appearance of the waterfall's white, frothy water as it cascades
+        down from a height of over 300 meters.
+      </h4>
+      <img alt="Nature's image" src={BlogImage} />
+      <div className="flex space-x-3">
+        <div className="bg-gray-50 shadow cursor-pointer py-1 px-2 hover:bg-gray-200">
+          {isPostLiked ? (
+            <LikeIcon onClick={() => setIsPostLiked(!isPostLiked)} />
+          ) : (
+            <LikeFillIcon
+              className="text-red-600"
+              onClick={() => setIsPostLiked(!isPostLiked)}
+            />
+          )}
         </div>
-    )
-}
+        <div
+          className={classNames(
+            "bg-gray-50 shadow cursor-pointer py-1 px-2 hover:bg-gray-200",
+            {
+              "bg-gray-200": isNewComment,
+            }
+          )}
+        >
+          <CommentIcon onClick={() => setIsNewComment(true)} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Post;
