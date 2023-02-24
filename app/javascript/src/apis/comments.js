@@ -6,6 +6,8 @@ const create = payload => axios.post("/comments/", payload);
 
 const update = ({ id, payload }) => axios.put(`/comments/${id}`, payload);
 
-const commentsApi = { list, create, update };
+const destroy = id => axios.delete(`/comments/${id}`);
+
+const commentsApi = { list, create, update, destroy };
 
 export default commentsApi;

@@ -29,7 +29,7 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id}) =>
             {!isEditComment && <div className="flex space-x-2 ">
         <UserAvatar avatarProp={avatarProp}/>
             <div className="flex flex-col space-y-1 w-full">
-            <Body userName="Shrishti Singh" content={content} setIsEditComment={setIsEditComment}/>
+            <Body userName="Shrishti Singh" content={content} setIsEditComment={setIsEditComment} id={id} fetchComments={fetchComments}/>
         <div className="flex space-x-6 items-center">
             <Upvote />
             <Reply setIsNewComment={setIsNewComment} />
