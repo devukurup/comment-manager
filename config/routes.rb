@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   defaults format: :json do
     resources :comments, only: %i[index create update destroy]
+    resources :users, only: :index
   end
 
   root "home#index"
