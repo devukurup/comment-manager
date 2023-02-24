@@ -5,4 +5,12 @@ class Comment < ApplicationRecord
     belongs_to :user
 
     validates :content, presence: true
+
+    def self.filter_comments
+        Comment.all.where(parent_id: nil)
+    end
+
+    def replies
+        Comment.all.where(parent_id: self.id)
+    end
 end

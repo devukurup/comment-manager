@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
     before_action :load_comment, only: %i[destroy update]
 
     def index
-        @comments = Comment.all
+        @comments = Comment.filter_comments
     end
 
     def create
