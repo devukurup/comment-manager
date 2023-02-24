@@ -4,7 +4,7 @@ import UpVoteIcon from "remixicon-react/ArrowUpSFillIcon";
 
 const Upvote = () => {
     return (
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1 cursor-pointer">
         <UpVoteIcon size="40px" className="text-gray-500"/>
         <p className="text-gray-600">5</p>
     </div>)

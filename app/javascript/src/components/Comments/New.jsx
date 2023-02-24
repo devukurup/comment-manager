@@ -1,0 +1,24 @@
+import React, { useState } from 'react';
+
+const New = ({ setIsNewComment }) => {
+    const [ newComment, setNewComment ] = useState("");
+    const handleCancel = () => {
+        setIsNewComment(false);
+    }
+
+    const handlePost = () => {
+        console.log(newComment)
+    }
+
+    return (
+        <div className="flex flex-col w-full mt-3 space-y-2">
+            <textarea rows={5} className="border rounded w-full p-2 font-light" value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Enter the comment"/>
+            <div className="flex space-x-2">
+                <button onClick={() => handlePost()} className="p-1 px-2 hover:bg-green-200 hover:text-green-900 border rounded">Post</button>
+                <button onClick={() => handleCancel()} className="p-1 px-2 hover:bg-red-200 hover:text-red-900 border rounded">Cancel</button>
+            </div>
+        </div>
+    )
+}
+
+export default New;

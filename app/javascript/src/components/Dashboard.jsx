@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Comments from './Comments';
+import New from './Comments/New';
 import Navbar from './Navbar';
 import Post from './Post';
 
 const Dashboard = () => {
+  const [isNewComment, setIsNewComment] = useState(false);
   // const [comments, setComments] = useState([]);
   //   const fetchComments = async () => {
   //       try{
@@ -22,8 +24,13 @@ const Dashboard = () => {
     return (
         <>
           <Navbar/>
-          <Post />
-          <Comments />
+          <Post isNewComment={isNewComment} setIsNewComment={setIsNewComment} />
+          {isNewComment &&
+          <div className="w-3/5 mx-auto mt-5">
+          <New setIsNewComment={setIsNewComment}/>
+          </div>
+          }
+          <Comments/>
 
         </>
     )
