@@ -16,7 +16,7 @@ const Content = ({ content, avatarProp, comments, parent}) => {
         <div className="flex flex-col space-y-2 mt-5">
             {!isEditComment && <div className="flex space-x-2 ">
         <UserAvatar avatarProp={avatarProp}/>
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col space-y-1 w-full">
             <Body userName="Shrishti Singh" content={content} setIsEditComment={setIsEditComment}/>
         <div className="flex space-x-6 items-center">
             <Upvote />
@@ -32,8 +32,8 @@ const Content = ({ content, avatarProp, comments, parent}) => {
         {replies.length > 0 &&
             <div className="flex flex-col ml-5">
             {
-            replies.map(({content, avatarProp, userId}) =>
-            <Content content={content} avatarProp={avatarProp} comments={comments} parent={userId}/>
+            replies.map(({content, avatarProp, user_id}) =>
+            <Content content={content} avatarProp={avatarProp} comments={comments} parent={user_id}/>
                 )}
                 </div>
                 }
