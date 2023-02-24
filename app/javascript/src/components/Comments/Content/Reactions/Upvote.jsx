@@ -3,20 +3,20 @@ import UpVoteIcon from "remixicon-react/ArrowUpSFillIcon";
 import classNames from 'classnames';
 import commentsApi from '../../../../apis/comments';
 import { filterUpvotes } from '../../../../utils/filterUpvotes';
-
+import { modifyUpvoteIds } from '../../../../utils/modifyUpvoteIds';
 
 const Upvote = ({ upvote_ids, currentUser, id, fetchComments }) => {
     const ids = filterUpvotes(upvote_ids);
-    const count = (ids)? ids.length: 0;
-    const [isActive, setIsActive] = useState(ids ? ids.includes(currentUser.id): false);
+    const count = ids? ids.length: 0;
+    const isVoted = (ids?.includes(currentUser.id));
+    const [isActive, setIsActive] = useState(isVoted);
 
-    const handleUpdate = async (e) => {
+    const handleUpdate = async (e, activeStatus) => {
         e.preventDefault();
-        setIsActive(prevState => !prevState);
-        let newUpvoteIds = isActive? [...ids, currentUser.id] : ids?.filter(id => id!== currentUser.id);
-        newUpvoteIds = typeof newUpvoteIds === "object" ? [...newUpvoteIds] : [ newUpvoteIds ];
+        setIsActive(activeStatus);
+        const newUpvoteIds = modifyUpvoteIds(activeStatus, ids, currentUser?.id)
         const payload = {
-            upvote_ids: newUpvoteIds ? JSON.stringify(newUpvoteIds) : null,
+            upvote_ids: JSON.stringify(newUpvoteIds),
         }
         try {
             await commentsApi.update({ id, payload});
@@ -33,7 +33,7 @@ const Upvote = ({ upvote_ids, currentUser, id, fetchComments }) => {
         <div className="flex items-center space-x-1 cursor-pointer">
         <UpVoteIcon size="40px" className={classNames("text-gray-500", {
                     "bg-gray-50 text-gray-800": isActive
-                })} onClick={(e) => handleUpdate(e)}/>
+                })} onClick={(e) => handleUpdate(e, !isActive)}/>
         <p className="text-gray-600">{count}</p>
     </div>)
 }

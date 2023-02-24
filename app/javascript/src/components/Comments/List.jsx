@@ -9,7 +9,7 @@ const List = ({comments, fetchComments, currentUser, users }) => {
         <Content
             id={id}
             userName={userName}
-            key={user_id}
+            key={id}
             content={content}
             comments={comments}
             avatarProp={avatarProp}
