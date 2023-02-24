@@ -1,10 +1,11 @@
 import React from 'react';
+import { getSortedComments } from '../../utils/getSortedComments';
 import Content from './Content';
 
 const List = ({comments, fetchComments, currentUser, users }) => {
     return (
         <>
-        {comments.map(({content, avatarProp, user_id, id, userName, upvote_ids, replies}) =>
+        {getSortedComments(comments).map(({content, avatarProp, user_id, id, userName, upvote_ids, replies}) =>
         <Content
             id={id}
             userName={userName}

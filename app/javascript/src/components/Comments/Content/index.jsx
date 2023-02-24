@@ -47,7 +47,7 @@ const Content = ({ content, users, comments, parent, fetchComments, id, currentU
         {replies?.length > 0 &&
             <div className="flex flex-col ml-5">
             {
-            replies.map(({content, avatarProp, user_id, id, upvote_ids, replies }) =>
+            replies.map(({content, avatarProp, user_id, id, upvote_ids, replies, userName }) =>
             <Content id={id} userName={userName} users={users} content={content} upvote_ids={upvote_ids} avatarProp={avatarProp} comments={comments} parent={user_id} fetchComments={fetchComments} currentUser={currentUser} replies={replies}/>
                 )}
                 </div>
