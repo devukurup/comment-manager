@@ -3,7 +3,7 @@ import EditIcon from "remixicon-react/EditLineIcon";
 import DeleteIcon from "remixicon-react/DeleteBinLineIcon";
 import commentsApi from '../../../apis/comments';
 
-const Body = ({ userName, content, setIsEditComment, id, fetchComments }) => {
+const Body = ({ userName, content, setIsEditComment, id, fetchComments, isCurrentUser }) => {
     const handleDelete = async () => {
         try{
             await commentsApi.destroy(id);
@@ -18,8 +18,8 @@ const Body = ({ userName, content, setIsEditComment, id, fetchComments }) => {
             <div className="flex justify-between">
             <p className="font-medium">{userName}</p>
             <div className="flex space-x-2">
-            <EditIcon size="16" className="text-gray-400 hover:text-gray-800" onClick={() => setIsEditComment(true)}/>
-            <DeleteIcon size="16" className="text-gray-400 hover:text-red-500" onClick={() => handleDelete()} />
+            {isCurrentUser && <EditIcon size="16" className="text-gray-400 hover:text-gray-800 cursor-pointer" onClick={() => setIsEditComment(true)}/>}
+            {isCurrentUser && <DeleteIcon size="16" className="text-gray-400 hover:text-red-500 cursor-pointer" onClick={() => handleDelete()} />}
             </div>
 
 

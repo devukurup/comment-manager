@@ -7,11 +7,13 @@ import Upvote from './Reactions/Upvote';
 import New from '../New';
 import Editor from '../Editor';
 import commentsApi from '../../../apis/comments';
+import { checkIsCurrentUser } from "../../../utils/checkIsCurrentUser";
 
 const Content = ({ content, avatarProp, comments, parent, fetchComments, id, currentUser, userName}) => {
     const replies = getReplyComments(comments, parent);
     const [isNewComment, setIsNewComment] = useState(false);
     const [ isEditComment, setIsEditComment] = useState(false);
+    const isCurrentUser = checkIsCurrentUser(parent, currentUser);
 
     const handleUpdate = async (payload) => {
         try {
@@ -29,7 +31,7 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id, cur
             {!isEditComment && <div className="flex space-x-2 ">
         <UserAvatar avatarProp={avatarProp}/>
             <div className="flex flex-col space-y-1 w-full">
-            <Body userName={userName} content={content} setIsEditComment={setIsEditComment} id={id} fetchComments={fetchComments}/>
+            <Body userName={userName} content={content} setIsEditComment={setIsEditComment} id={id} fetchComments={fetchComments} isCurrentUser={isCurrentUser}/>
         <div className="flex space-x-6 items-center">
             <Upvote />
             <Reply setIsNewComment={setIsNewComment} />
