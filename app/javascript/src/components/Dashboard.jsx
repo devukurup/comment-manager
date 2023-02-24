@@ -10,10 +10,9 @@ import Post from './Post';
 const Dashboard = () => {
   const [isNewComment, setIsNewComment] = useState(false);
   const [comments, setComments] = useState([]);
-  const [parentComments, setParentComments] = useState([]);
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
-
+  const [isLoading, setIsLoading] = useState(false);
   const fetchUsers = async () => {
     try {
       const { data } = await usersApi.list();
@@ -30,12 +29,14 @@ const Dashboard = () => {
 
   const fetchComments = async() => {
     try {
+    setIsLoading(true);
     const { data } = await commentsApi.list();
     setComments(data?.comments)
-    setParentComments(data?.comments?.filter(comment => comment.parent_id === null))
-
     }catch(error){
         console.log(error);
+    }
+    finally {
+      setIsLoading(false);
     }
 }
 
@@ -43,6 +44,7 @@ useEffect(() => {
   fetchUsers();
   fetchComments();
 }, []);
+
     return (
         <>
           <Navbar currentUser={currentUser}/>
@@ -52,14 +54,13 @@ useEffect(() => {
           <New setIsNewComment={setIsNewComment} fetchComments={fetchComments}/>
           </div>
           }
-          <Comments
-            parentComments={parentComments}
+          {!isLoading && <Comments
             comments={comments}
             fetchComments={fetchComments}
             users={users}
             setComments={setComments}
             currentUser={currentUser}
-          />
+          />}
 
         </>
     )

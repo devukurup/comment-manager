@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import List from './List';
 
-const Comments = ({parentComments, comments, fetchComments, currentUser, users, setComments}) => {
+const Comments = ({comments, fetchComments, currentUser, users, setComments}) => {
+    const [parentComments, setParentComments] = useState([]);
     const setFilteredComments = () => {
-        const filterComments = comments.map(comment => {
-            const { user_id } = comment;
-            const avatarProp = users.find(user => user.id === user_id).avatarProp;
+        const filterComments = comments?.map(comment => {
+            const avatarProp = users.find(user => user.id === comment.user_id).avatarProp;
             return({...comment, avatarProp})
         });
         setComments(filterComments);
+        setParentComments(filterComments?.filter(comment => comment.parent_id === null))
     };
 
     useEffect(() => {
         setFilteredComments();
-    });
-    
+    }, []);
+
     return (
         <div className="mt-8 flex w-3/5 mx-auto flex-col space-y-2">
             <List
@@ -22,7 +23,6 @@ const Comments = ({parentComments, comments, fetchComments, currentUser, users, 
                 comments={comments}
                 fetchComments={fetchComments}
                 currentUser={currentUser}
-                users={users}
             />
         </div>
     )

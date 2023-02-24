@@ -8,7 +8,7 @@ import New from '../New';
 import Editor from '../Editor';
 import commentsApi from '../../../apis/comments';
 
-const Content = ({ content, avatarProp, comments, parent, fetchComments, id}) => {
+const Content = ({ content, avatarProp, comments, parent, fetchComments, id, currentUser, userName}) => {
     const replies = getReplyComments(comments, parent);
     const [isNewComment, setIsNewComment] = useState(false);
     const [ isEditComment, setIsEditComment] = useState(false);
@@ -29,7 +29,7 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id}) =>
             {!isEditComment && <div className="flex space-x-2 ">
         <UserAvatar avatarProp={avatarProp}/>
             <div className="flex flex-col space-y-1 w-full">
-            <Body userName="Shrishti Singh" content={content} setIsEditComment={setIsEditComment} id={id} fetchComments={fetchComments}/>
+            <Body userName={userName} content={content} setIsEditComment={setIsEditComment} id={id} fetchComments={fetchComments}/>
         <div className="flex space-x-6 items-center">
             <Upvote />
             <Reply setIsNewComment={setIsNewComment} />
@@ -44,8 +44,8 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id}) =>
         {replies.length > 0 &&
             <div className="flex flex-col ml-5">
             {
-            replies.map(({content, avatarProp, user_id, id}) =>
-            <Content id={id} content={content} avatarProp={avatarProp} comments={comments} parent={user_id} fetchComments={fetchComments}/>
+            replies.map(({content, avatarProp, user_id, id, userName}) =>
+            <Content id={id} content={content} avatarProp={avatarProp} comments={comments} parent={user_id} userName={userName} fetchComments={fetchComments} currentUser={currentUser}/>
                 )}
                 </div>
                 }
