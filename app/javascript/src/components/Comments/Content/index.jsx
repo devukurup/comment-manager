@@ -39,7 +39,7 @@ const Content = ({ content, avatarProp, comments, parent, fetchComments, id, cur
         </div>}
         {isEditComment && <Editor content={content} setIsEditComment={setIsEditComment} handleUpdate={handleUpdate}/>}
         {isNewComment && <div className="flex w-11/12 content-end">
-            <New setIsNewComment={setIsNewComment} fetchComments={fetchComments}/>
+            <New setIsNewComment={setIsNewComment} fetchComments={fetchComments} id={id}/>
         </div>}
 
         {replies.length > 0 &&
