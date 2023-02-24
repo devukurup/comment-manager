@@ -18,7 +18,7 @@ const New = ({ setIsNewComment, fetchComments, id }) => {
             }
             await commentsApi.create(payload);
             fetchComments();
-            handleCancel();
+            handleCancel(e);
         }
         catch(error){
             console.log(error);
