@@ -3,7 +3,7 @@ import EditIcon from "remixicon-react/EditLineIcon";
 import DeleteIcon from "remixicon-react/DeleteBinLineIcon";
 import commentsApi from '../../../apis/comments';
 
-const Body = ({ userName, content, setIsEditComment, id, fetchComments, isCurrentUser }) => {
+const Body = ({ userName, content, setIsEditComment, mentionedUser, id, fetchComments, isCurrentUser, isNestedReply }) => {
     const handleDelete = async (e) => {
         e.preventDefault();
         try{
@@ -25,7 +25,9 @@ const Body = ({ userName, content, setIsEditComment, id, fetchComments, isCurren
 
 
             </div>
-            <p className="font-light">{content}</p>
+            <p className="font-light">
+                {isNestedReply && <span className="text-blue-600">@{mentionedUser} </span>}
+                {content}</p>
         </div>
     )
 }
