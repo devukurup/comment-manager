@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UpVoteIcon from "remixicon-react/ArrowUpSFillIcon";
 import classNames from 'classnames';
 import commentsApi from '../../../../apis/comments';
+import toast from 'react-hot-toast';
 
 const Upvote = ({ upvote_ids, currentUser, id, fetchComments }) => {
     const isCurrentUserVoted = upvote_ids?.includes(currentUser?.id);
@@ -14,11 +15,13 @@ const Upvote = ({ upvote_ids, currentUser, id, fetchComments }) => {
             }
         setCount(comment?.upvote_ids?.length)
         try {
-            await commentsApi.update({ id, payload: { comment }});
+            const {data} = await commentsApi.update({ id, payload: { comment }});
+            toast.success(data?.notice)
             fetchComments();
         }
         catch(error) {
             console.log(error);
+            toast.error(error);
         }
     }
 

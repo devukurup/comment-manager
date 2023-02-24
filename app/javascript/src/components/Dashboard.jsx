@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import commentsApi from '../apis/comments';
 import usersApi from '../apis/users';
 import { generateRandomAvatarProp } from '../utils/generateRandomAvatarProp';
@@ -6,6 +7,7 @@ import Comments from './Comments';
 import New from './Comments/New';
 import Navbar from './Navbar';
 import Post from './Post';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
   const [isNewComment, setIsNewComment] = useState(false);
@@ -13,6 +15,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  
   const fetchUsers = async () => {
     try {
       const { data } = await usersApi.list();
@@ -24,6 +27,8 @@ const Dashboard = () => {
     }
     catch(error) {
       console.log(error);
+      toast.error(error);
+
     }
   }
 
@@ -34,6 +39,7 @@ const Dashboard = () => {
     setComments(data?.comments)
     }catch(error){
         console.log(error);
+        toast.error(error);
     }
     finally {
       setIsLoading(false);
@@ -61,7 +67,7 @@ useEffect(() => {
             setComments={setComments}
             currentUser={currentUser}
           />}
-
+          <Toaster position="bottom-center"/>
         </>
     )
 }

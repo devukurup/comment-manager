@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import commentsApi from '../../apis/comments';
+import toast from 'react-hot-toast';
 
 const New = ({ setIsNewComment, fetchComments, id, userName, parent_id }) => {
     const isNestedReply = parent_id ? true: false;
@@ -20,12 +21,14 @@ const New = ({ setIsNewComment, fetchComments, id, userName, parent_id }) => {
                 is_nested_reply: isNestedReply,
                 user_mentioned: userName ?? null,
             }
-            await commentsApi.create(payload);
+            const { data } = await commentsApi.create(payload);
+            toast.success(data?.notice)
             fetchComments();
             handleCancel(e);
         }
         catch(error){
             console.log(error);
+            toast.error(error);
         }
     }
 

@@ -7,6 +7,7 @@ import New from '../New';
 import Editor from '../Editor';
 import commentsApi from '../../../apis/comments';
 import { checkIsCurrentUser } from "../../../utils/checkIsCurrentUser";
+import toast from 'react-hot-toast';
 
 const Content = ({ content, users, comments, user_id, parent_id, fetchComments, id, currentUser, upvote_ids, replies, userName, mentionedUser, isNestedReply}) => {
     const [isNewComment, setIsNewComment] = useState(false);
@@ -18,12 +19,14 @@ const Content = ({ content, users, comments, user_id, parent_id, fetchComments, 
     const handleUpdate = async (e, payload) => {
         e.preventDefault();
         try {
-            await commentsApi.update({ id, payload});
+            const { data } = await commentsApi.update({ id, payload});
+            toast.success(data?.notice)
             fetchComments();
             setIsEditComment(false);
         }
         catch(error) {
             console.log(error);
+            toast.error(error);
         }
     }
 
