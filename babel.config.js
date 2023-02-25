@@ -37,13 +37,7 @@ module.exports = function (api) {
           exclude: ["transform-typeof-symbol"]
         }
       ],
-      [
-        "@babel/preset-react",
-        {
-          development: isDevelopmentEnv || isTestEnv,
-          useBuiltIns: true
-        }
-      ]
+      ["@babel/preset-react"],
     ].filter(Boolean),
     plugins: [
       ["@babel/plugin-proposal-private-methods", { loose: true }],
