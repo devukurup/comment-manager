@@ -82,7 +82,7 @@ const Content = ({
         />
       )}
       {isNewComment && (
-        <div className="ml-32 flex w-11/12 content-end">
+        <div className="flex w-11/12 content-end md:ml-32">
           <New
             fetchComments={fetchComments}
             id={id}

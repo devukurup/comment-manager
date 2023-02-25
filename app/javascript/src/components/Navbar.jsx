@@ -7,16 +7,16 @@ const Navbar = ({ currentUser }) => {
 
   return (
     <nav className="shadow flex w-full items-center justify-between p-3">
-      <div className="font-sans text-2xl font-light">
+      <div className="font-sans font-light md:text-2xl">
         <h2>Comment Manager</h2>
       </div>
-      <div className="items flex space-x-2">
+      <div className="flex items-center space-x-2">
         <Avatar
           avatarStyle="Circle"
           style={{ width: "30px", height: "30px" }}
           topType={avatarProp}
         />
-        <h4 className="text-lg font-normal">{name}</h4>
+        <h4 className="font-normal md:text-lg">{name}</h4>
       </div>
     </nav>
   );

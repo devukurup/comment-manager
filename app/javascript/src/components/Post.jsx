@@ -11,7 +11,7 @@ const Post = ({ isNewComment, setIsNewComment }) => {
   const [isPostLiked, setIsPostLiked] = useState(false);
 
   return (
-    <div className="b-1 m-2 mx-auto mt-10 flex w-3/5 flex-col space-y-5 rounded-xl border-2 p-5">
+    <div className="b-1 m-2 mx-4 mt-10 flex flex-col space-y-5 rounded-xl border-2 p-5 md:mx-auto md:w-3/5">
       <h1 className="text-lg font-semibold">Earth's treasures</h1>
       <h4>
         Dudhsagar is a stunning waterfall located on the Mandovi River in Goa,
