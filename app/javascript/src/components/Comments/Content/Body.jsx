@@ -29,7 +29,7 @@ const Body = ({
   };
 
   return (
-    <div className="border flex w-full flex-col space-y-2 p-2">
+    <div className="border flex w-full flex-col space-y-2 rounded-xl p-2">
       <div className="flex justify-between">
         <p className="font-medium">{userName}</p>
         <div className="flex space-x-2">

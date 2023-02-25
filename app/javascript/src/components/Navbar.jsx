@@ -7,7 +7,7 @@ const Navbar = ({ currentUser }) => {
 
   return (
     <nav className="shadow flex w-full items-center justify-between p-3">
-      <div className="font- text-2xl">
+      <div className="font-sans text-2xl font-light">
         <h2>Comment Manager</h2>
       </div>
       <div className="items flex space-x-2">
