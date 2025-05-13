@@ -1,24 +1,12 @@
-# README
+# comment-manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple comment management system built with React and Ruby on Rails. Supports creating, editing, deleting, and listing comments with user association and real-time updates.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🛠 Tech Stack
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- React JS  
+- Ruby on Rails  
+- Tailwind CSS  
+- PostgreSQL
